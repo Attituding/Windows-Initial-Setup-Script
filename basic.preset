@@ -1,0 +1,104 @@
+### Require administrator privileges ###
+# RequireAdmin
+
+### Privacy Tweaks ###
+DisableTelemetry                  # EnableTelemetry
+DisableCortana                    # EnableCortana
+DisableWiFiSense                  # EnableWiFiSense
+EnableWebSearch                   # DisableWebSearch
+DisableAppSuggestions             # EnableAppSuggestions
+DisableActivityHistory            # EnableActivityHistory
+DisableLocation                   # EnableLocation
+DisableMapUpdates                 # EnableMapUpdates
+DisableFeedback                   # EnableFeedback
+DisableTailoredExperiences        # EnableTailoredExperiences
+DisableAdvertisingID              # EnableAdvertisingID
+DisableWebLangList                # EnableWebLangList
+# DisableBiometrics               # EnableBiometrics
+# DisableCamera                   # EnableCamera
+# DisableMicrophone               # EnableMicrophone
+SetP2PUpdateDisable               # SetP2PUpdateLocal           # SetP2PUpdateInternet
+DisableDiagTrack                  # EnableDiagTrack
+DisableWAPPush                    # EnableWAPPush
+EnableClearRecentFiles            # DisableClearRecentFiles
+DisableRecentFiles                # EnableRecentFiles
+
+### UWP Privacy Tweaks ###
+DisableUWPVoiceActivation         # EnableUWPVoiceActivation
+DisableUWPContacts                # EnableUWPContacts
+DisableUWPPhoneCalls              # EnableUWPPhoneCalls
+DisableUWPCallHistory             # EnableUWPCallHistory
+DisableUWPEmail                   # EnableUWPEmail
+DisableUWPMessaging               # EnableUWPMessaging
+DisableUWPRadios                  # EnableUWPRadios
+
+### Security Tweaks ###
+# SetUACAdminConsentWin           # SetUACAdminNone               # SetUACAdminCredsSecure        # SetUACAdminConsentSecure     # SetUACAdminCreds              # SetUACAdminConsent
+HideDefenderTrayIcon              # ShowDefenderTrayIcon
+EnableCIMemoryIntegrity           # DisableCIMemoryIntegrity
+HideAccountProtectionWarn         # ShowAccountProtectionWarn
+
+### Network Tweaks ###
+DisableRemoteAssistance           # EnableRemoteAssistance
+
+### Service Tweaks ###
+EnableHibernation                 # DisableHibernation
+
+### UI Tweaks ###
+ShowTaskManagerDetails            # HideTaskManagerDetails
+ShowTaskbarSearchIcon             # ShowTaskbarSearchBox        # HideTaskbarSearch
+HideTaskbarChat                   # ShowTaskbarChat
+HideTaskbarPeopleIcon             # ShowTaskbarPeopleIcon
+ShowSecondsInTaskbar              # HideSecondsFromTaskbar
+HideRecentlyAddedApps             # ShowRecentlyAddedApps
+DisableShortcutInName             # EnableShortcutInName
+SetAppsDarkMode                   # SetAppsLightMode
+SetSystemDarkMode                 # SetSystemLightMode
+DisableEnhPointerPrecision        # EnableEnhPointerPrecision
+EnableStartupSound                # DisableStartupSound
+EnableVerboseStatus               # DisableVerboseStatus
+DisableF1HelpKey                  # EnableF1HelpKey
+
+### Explorer UI Tweaks ###
+ShowExplorerTitleFullPath         # HideExplorerTitleFullPath
+ShowKnownExtensions               # HideKnownExtensions
+ShowHiddenFiles                   # HideHiddenFiles
+DisableNavPaneExpand              # EnableNavPaneExpand
+SetExplorerThisPC                 # SetExplorerQuickAccess
+HideDesktopFromThisPC             # ShowDesktopInThisPC
+HideDocumentsFromThisPC           # ShowDocumentsInThisPC
+HideDownloadsFromThisPC           # ShowDownloadsInThisPC
+HideMusicFromThisPC               # ShowMusicInThisPC
+HidePicturesFromThisPC            # ShowPicturesInThisPC
+HideVideosFromThisPC              # ShowVideosInThisPC
+Hide3DObjectsFromThisPC           # Show3DObjectsInThisPC
+HideIncludeInLibraryMenu          # ShowIncludeInLibraryMenu
+HideShareMenu                     # ShowShareMenu
+
+### Application Tweaks ###
+DisableMeetNow                    # EnableMeetNow
+UninstallMsftBloat                # InstallThirdPartyBloat
+UninstallThirdPartyBloat          # InstallThirdPartyBloat
+#InstallWindowsStore              # UninstallWindowsStore       # wsreset -i
+DisableXboxFeatures               # EnableXboxFeatures
+DisableEdgePreload                # EnableEdgePreload
+DisableEdgeShortcutCreation       # EnableEdgeShortcutCreation
+DisableFirstLogonAnimation        # EnableFirstLogonAnimation
+UninstallMediaPlayer              # InstallMediaPlayer
+UninstallInternetExplorer         # InstallInternetExplorer
+UninstallPowerShellV2             # InstallPowerShellV2
+UninstallPowerShellISE            # InstallPowerShellISE
+InstallLinuxSubsystem             # UninstallLinuxSubsystem
+InstallWindowsSandbox             # UninstallWindowsSandbox
+UninstallSSHClient                # InstallSSHClient
+UninstallSSHServer                # InstallSSHServer
+
+### Server Specific Tweaks ###
+
+### Unpinning ###
+UnpinStartMenuTiles
+UnpinTaskbarIcons
+
+### Auxiliary Functions ###
+# WaitForKey
+# Restart

@@ -1,7 +1,6 @@
 ##########
 # Win 10 / Server 2016 / Server 2019 Initial Setup Script - Tweak library
 # Author: Disassembler <disassembler@dasm.cz>
-# Version: v3.10, 2020-07-15
 # Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
 ##########
 
@@ -837,18 +836,68 @@ Function EnableUWPSwapFile {
 #region Security Tweaks
 ##########
 
-# Lower UAC level (disabling it completely would break apps)
-Function SetUACLow {
-	Write-Output "Lowering UAC level..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
+# Enable secure desktop for UAC prompts.
+# This policy will force all UAC prompts to happen on the user's secure desktop.
+Function EnableUACSecureDesktop {
+	Write-Output "Enabling UAC Secure Desktop..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
+}
+
+# Disable secure desktop for UAC prompts.
+# Disabling this policy disables secure desktop prompting. All credential or consent prompting will occur on the interactive user's desktop.
+Function DisableUACSecureDesktop {
+	Write-Output "Enabling UAC Secure Desktop..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
 }
 
-# Raise UAC level
-Function SetUACHigh {
-	Write-Output "Raising UAC level..."
+# Set UAC to never prompt for credentials or consent.
+Function SetUACAdminNone {
+	Write-Output "Setting UAC to never prompt for credentials or consent..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
+}
+
+# Set UAC to prompt for credentials on a secure desktop.
+Function SetUACAdminCredsSecure {
+	Write-Output "Setting UAC to prompt for credentials on a secure desktop..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 1
+}
+
+# Set UAC to prompt for consent on a secure desktop.
+Function SetUACAdminConsentSecure {
+	Write-Output "Setting UAC to prompt for consent on a secure desktop..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 2
+}
+
+# Set UAC to prompt for credentials.
+Function SetUACAdminCreds {
+	Write-Output "Setting UAC to prompt for credentials..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 3
+}
+
+# Set UAC to prompt for consent.
+Function SetUACAdminConsent {
+	Write-Output "Setting UAC to prompt for consent..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 4
+}
+
+# Set UAC to prompt for consent for any non-Windows binaries on a secure desktop.
+Function SetUACAdminConsentWin {
+	Write-Output "Setting UAC to prompt for consent for any non-Windows binaries on a secure desktop..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
+}
+
+# Enable UAC prompts for standard users
+# This option SHOULD be set to ensure that a standard user that needs to perform an operation that requires elevation of privilege will be prompted for an administrative user name and password. If the user enters valid credentials, the operation will continue with the applicable privilege.
+Function EnableUACUserPrompt {
+	Write-Output "Enabling UAC prompts for standard users..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 1
+}
+
+# Disable UAC prompts for standard users
+# This option SHOULD be set to ensure that any operation that requires elevation of privilege will fail as a standard user.
+Function DisableUACUserPrompt {
+	Write-Output "Disabling UAC prompts for standard users..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorUser" -Type DWord -Value 0
 }
 
 # Enable sharing mapped drives between users
@@ -1788,6 +1837,7 @@ Function EnableAutoRebootOnCrash {
 	Write-Output "Enabling automatic reboot on crash (BSOD)..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl" -Name "AutoReboot" -Type DWord -Value 1
 }
+
 
 ##########
 #endregion Service Tweaks
@@ -3816,6 +3866,18 @@ Function UninstallHyperV {
 	} Else {
 		Uninstall-WindowsFeature -Name "Hyper-V" -IncludeManagementTools -WarningAction SilentlyContinue | Out-Null
 	}
+}
+
+# Install Windows Sandbox - Not applicable to Home
+Function InstallWindowsSandbox {
+	Write-Output "Installing Windows Sandbox..."
+	Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq "Containers-DisposableClientVM" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null
+}
+
+# Uninstall Windows Sandbox - Not applicable to Home
+Function UninstallWindowsSandbox {
+	Write-Output "Uninstalling Windows Sandbox..."
+	Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq "Containers-DisposableClientVM" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
 
 # Uninstall OpenSSH Client - Applicable since 1803

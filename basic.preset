@@ -46,7 +46,7 @@ EnableHibernation                 # DisableHibernation
 
 ### UI Tweaks ###
 ShowTaskManagerDetails            # HideTaskManagerDetails
-ShowTaskbarSearchIcon             # ShowTaskbarSearchBox        # HideTaskbarSearch
+HideTaskbarSearch                 # ShowTaskbarSearchBox        # ShowTaskbarSearchIcon
 HideTaskbarChat                   # ShowTaskbarChat
 HideTaskbarPeopleIcon             # ShowTaskbarPeopleIcon
 ShowSecondsInTaskbar              # HideSecondsFromTaskbar
@@ -97,7 +97,7 @@ UninstallSSHServer                # InstallSSHServer
 
 ### Unpinning ###
 UnpinStartMenuTiles
-UnpinTaskbarIcons
+# UnpinTaskbarIcons
 
 ### Auxiliary Functions ###
 # WaitForKey

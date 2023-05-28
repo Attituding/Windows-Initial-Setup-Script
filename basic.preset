@@ -55,7 +55,6 @@ DisableShortcutInName             # EnableShortcutInName
 SetAppsDarkMode                   # SetAppsLightMode
 SetSystemDarkMode                 # SetSystemLightMode
 DisableEnhPointerPrecision        # EnableEnhPointerPrecision
-EnableStartupSound                # DisableStartupSound
 EnableVerboseStatus               # DisableVerboseStatus
 DisableF1HelpKey                  # EnableF1HelpKey
 
